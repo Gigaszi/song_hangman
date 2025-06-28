@@ -10,10 +10,12 @@
   <button (click)="loadRandomChorus()">🔁 New Chorus</button>
 </div>
 
-<!-- ✅ New section -->
 <div class="guess-list" *ngIf="guessedWords.size > 0">
   <h3>Guessed Words ({{ guessedWords.size }}):</h3>
-  <ul>
-    <li *ngFor="let word of sortedGuesses">{{ word }}</li>
-  </ul>
+  <div class="guess-tags">
+    <span *ngFor="let word of sortedGuesses" class="guess-tag">
+      {{ word }}
+    </span>
+  </div>
 </div>
+
