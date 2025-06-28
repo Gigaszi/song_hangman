@@ -5,9 +5,19 @@ import * as chorusData from '../../assets/choruses.json';
   providedIn: 'root'
 })
 export class ChorusService {
-  getRandomChorus(): string {
+  private choruses: string[] = [];
+
+  constructor() {
     const data: any = chorusData;
-    const index = Math.floor(Math.random() * data.default.length);
-    return data.default[index].text;
+    this.choruses = data.default.map((c: any) => c.text);
+  }
+
+  getRandomChorus(): string {
+    const index = Math.floor(Math.random() * this.choruses.length);
+    return this.choruses[index];
+  }
+
+  getAllChoruses(): string[] {
+    return this.choruses;
   }
 }
