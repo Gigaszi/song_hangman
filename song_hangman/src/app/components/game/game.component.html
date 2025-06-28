@@ -1,0 +1,19 @@
+<h2>🎵 Guess the Chorus 🎵</h2>
+
+<div class="chorus-display">
+  <span *ngFor="let word of maskedChorus" class="word">{{ word }}</span>
+</div>
+
+<div class="input-area">
+  <input [(ngModel)]="guess" placeholder="Enter a word" (keyup.enter)="submitGuess()" />
+  <button (click)="submitGuess()">Guess</button>
+  <button (click)="loadRandomChorus()">🔁 New Chorus</button>
+</div>
+
+<!-- ✅ New section -->
+<div class="guess-list" *ngIf="guessedWords.size > 0">
+  <h3>Guessed Words ({{ guessedWords.size }}):</h3>
+  <ul>
+    <li *ngFor="let word of sortedGuesses">{{ word }}</li>
+  </ul>
+</div>
