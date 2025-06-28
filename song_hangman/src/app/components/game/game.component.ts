@@ -37,8 +37,8 @@ export class GameComponent implements OnInit {
 
     const randomChorus = unusedChoruses[Math.floor(Math.random() * unusedChoruses.length)];
     this.usedChoruses.add(randomChorus);
-    this.currentChorusText = JSON.stringify(randomChorus);
-    console.log(this.currentChorusText);
+    this.currentChorusText = randomChorus.replace(/\[[^\]]*\]|\([^\)]*\)|\{[^\}]*\}/g, '');
+    this.currentChorusText = JSON.stringify(this.currentChorusText );
 
     function extractWordsAndLinebreaks(text: string): string[] {
       const textWithLinebreaks = text.replace(/\\n/g, ' breaklinehere ');
@@ -62,7 +62,6 @@ export class GameComponent implements OnInit {
 
 
     this.originalChorus = extractWordsAndLinebreaks(this.currentChorusText);
-    console.log(`Original chorus tokens:`, this.originalChorus);
 
     this.maskedChorus = this.originalChorus.map(token => {
       if (token === 'breaklinehere') {
@@ -74,7 +73,6 @@ export class GameComponent implements OnInit {
 
     this.guessedWords.clear();
     this.guess = '';
-    console.log(this.maskedChorus.filter(t => t === 'breaklinehere').length);
   }
 
   submitGuess() {
