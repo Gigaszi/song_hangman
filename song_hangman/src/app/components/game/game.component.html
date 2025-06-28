@@ -1,8 +1,13 @@
 <h2>🎵 Guess the Chorus 🎵</h2>
 
 <div class="chorus-display">
-  <span *ngFor="let word of maskedChorus" class="word">{{ word }}</span>
+  <ng-container *ngFor="let token of maskedChorus">
+    <div *ngIf="token === 'breaklinehere'" style="flex-basis: 100%; height: 0;"></div>
+    <span *ngIf="token !== 'breaklinehere' && token.trim() !== ''" class="word">{{ token }}</span>
+  </ng-container>
 </div>
+
+
 
 <div class="input-area">
   <input [(ngModel)]="guess" placeholder="Enter a word" (keyup.enter)="submitGuess()" />
